@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using kolokwium_poprawa.Models;
 using kolokwium_poprawa.Repositories;
 using kolokwium_poprawa.Services;
@@ -10,11 +12,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.WriteIndented = true;
+    });
 builder.Services.AddDbContext<KolokwiumContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IRacerService, RacerSevice>();
 builder.Services.AddScoped<IParticipationRepository, ParticipationRepository>();
 builder.Services.AddScoped<IRacerRepository, RacerRepository>();
+builder.Services.AddScoped<ITrackRaceRepository, TrackRaceRepository>();
+builder.Services.AddScoped<IRaceRepository, RaceRepository>();
+
+
 
 
 

@@ -14,6 +14,6 @@ public class ParticipationRepository : IParticipationRepository
 
     public async Task<ICollection<RaceParticipation>> getAllParticipations()
     {
-        return await _context.RaceParticipations.Include(t=> t.TrackRace.Race).ToListAsync();
+        return await _context.RaceParticipations.ToListAsync();
     }
 }

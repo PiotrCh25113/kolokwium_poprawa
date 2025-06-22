@@ -14,6 +14,6 @@ public class RacerRepository : IRacerRepository
 
     public async Task<Racer> getRacer(int id)
     {
-        return await _context.Racers.Include(r=>r.RaceParticipations).FirstOrDefaultAsync(r=>r.RacerId == id);
+        return await _context.Racers.FirstOrDefaultAsync(r=>r.RacerId == id);
     }
 }
